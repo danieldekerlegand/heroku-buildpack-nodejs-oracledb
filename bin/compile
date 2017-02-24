@@ -9,6 +9,18 @@ indent() {
     echo "       $*" || true
 }
 
+export_env_dir() {
+  whitelist_regex=${2:-''}
+  blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
+  if [ -d "$ENV_DIR" ]; then
+    for e in $(ls $ENV_DIR); do
+      echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+      export "$e=$(cat $ENV_DIR/$e)"
+      :
+    done
+  fi
+}
+
 VENDOR_DIR=$BUILD_DIR/vendor
 ORACLE_DIR=$VENDOR_DIR/oracle
 INSTANTCLIENT_DIR=$ORACLE_DIR/instantclient_12_1
@@ -17,8 +29,7 @@ PROFILE_D_DIR=$BUILD_DIR/.profile.d
 BASIC_FILENAME=instantclient-basic-linux.x64-12.1.0.2.0.zip
 SDK_FILENAME=instantclient-sdk-linux.x64-12.1.0.2.0.zip
 
-export "$MIRROR_CLIENT=$(cat $ENV_DIR/$MIRROR_CLIENT)"
-export "$MIRROR_SDK=$(cat $ENV_DIR/$MIRROR_SDK)"
+export_env_dir
 
 echo "Client file located at $MIRROR_CLIENT"
 echo "SDK file located at $MIRROR_SDK"
