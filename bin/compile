@@ -17,19 +17,22 @@ PROFILE_D_DIR=$BUILD_DIR/.profile.d
 BASIC_FILENAME=instantclient-basic-linux.x64-12.1.0.2.0.zip
 SDK_FILENAME=instantclient-sdk-linux.x64-12.1.0.2.0.zip
 
-export "$MIRROR=$(cat $ENV_DIR/$MIRROR)"
-echo "File located at $MIRROR"
+export "$MIRROR_CLIENT=$(cat $ENV_DIR/$MIRROR_CLIENT)"
+export "$MIRROR_SDK=$(cat $ENV_DIR/$MIRROR_SDK)"
+
+echo "Client file located at $MIRROR_CLIENT"
+echo "SDK file located at $MIRROR_SDK"
 
 MIRROR=$MIRROR
 
 if [ ! -f $CACHE_DIR/$BASIC_FILENAME ]; then
     indent "Downloading $BASIC_FILENAME..."
-    curl -# -o $CACHE_DIR/$BASIC_FILENAME $MIRROR/$BASIC_FILENAME
+    curl -# -o $CACHE_DIR/$BASIC_FILENAME $MIRROR_CLIENT
 fi
 
 if [ ! -f $CACHE_DIR/$SDK_FILENAME ]; then
     indent "Downloading $SDK_FILENAME..."
-    curl -# -o $CACHE_DIR/$SDK_FILENAME $MIRROR/$SDK_FILENAME
+    curl -# -o $CACHE_DIR/$SDK_FILENAME $MIRROR_SDK
 fi
 
 mkdir -p $ORACLE_DIR
