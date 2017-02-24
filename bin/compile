@@ -50,9 +50,9 @@ ls $BUILD_DIR
 
 mkdir -p $ORACLE_DIR
 indent "Extracting $BASIC_FILENAME..."
-unzip -qq $BUILD_DIR/$BASIC_FILENAME -d $ORACLE_DIR
+unzip -qq $CACHE_DIR/$BASIC_FILENAME -d $ORACLE_DIR
 indent "Extracting $SDK_FILENAME..."
-unzip -qq $BUILD_DIR/$SDK_FILENAME -d $ORACLE_DIR
+unzip -qq $CACHE_DIR/$SDK_FILENAME -d $ORACLE_DIR
 
 indent "Symlinking libclntsh.so..."
 ln -s libclntsh.so.12.1 $INSTANTCLIENT_DIR/libclntsh.so
