@@ -3,4 +3,6 @@
 
 cat <<EOF
 --- {}
+default_process_types:
+  web: bin/node ./bin/www
 EOF
