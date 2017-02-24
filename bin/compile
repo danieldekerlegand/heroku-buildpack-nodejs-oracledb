@@ -31,9 +31,9 @@ SDK_FILENAME=instantclient-sdk-linux.x64-12.1.0.2.0.zip
 
 mkdir -p $ORACLE_DIR
 indent "Extracting $BASIC_FILENAME..."
-unzip -qq $ENV_DIR/$BASIC_FILENAME -d $ORACLE_DIR
+unzip -qq $BUILD_DIR/$BASIC_FILENAME -d $ORACLE_DIR
 indent "Extracting $SDK_FILENAME..."
-unzip -qq $ENV_DIR/$SDK_FILENAME -d $ORACLE_DIR
+unzip -qq $BUILD_DIR/$SDK_FILENAME -d $ORACLE_DIR
 
 indent "Symlinking libclntsh.so..."
 ln -s libclntsh.so.12.1 $INSTANTCLIENT_DIR/libclntsh.so
